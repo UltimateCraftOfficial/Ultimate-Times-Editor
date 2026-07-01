@@ -8,72 +8,24 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&display=swap');
         
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
-            color: #1e293b;
-        }
-
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
         h1, .serif-heading { font-family: 'Merriweather', serif; }
-
         .custom-scrollbar::-webkit-scrollbar { width: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 10px; }
         
-        .news-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        }
+        .news-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
 
-        .btn-editorial {
-            background-color: #0f172a;
-            color: #ffffff;
-            transition: all 0.2s ease;
-            font-weight: 600;
-        }
-        .btn-editorial:hover:not(:disabled) {
-            background-color: #334155;
-            transform: translateY(-1px);
-        }
-        .btn-editorial:disabled {
-            background-color: #94a3b8;
-            cursor: not-allowed;
-            transform: none;
-        }
+        .btn-editorial { background-color: #0f172a; color: #ffffff; transition: all 0.2s ease; font-weight: 600; }
+        .btn-editorial:hover:not(:disabled) { background-color: #334155; transform: translateY(-1px); }
+        .btn-editorial:disabled { background-color: #94a3b8; cursor: not-allowed; transform: none; }
         
-        .input-editorial {
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-            color: #0f172a;
-            transition: all 0.2s;
-            border-radius: 6px;
-        }
-        .input-editorial:focus {
-            border-color: #475569;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.1);
-        }
+        .input-editorial { background: #ffffff; border: 1px solid #cbd5e1; color: #0f172a; transition: all 0.2s; border-radius: 6px; }
+        .input-editorial:focus { border-color: #475569; outline: none; box-shadow: 0 0 0 3px rgba(71, 85, 105, 0.1); }
 
-        .image-preview {
-            max-height: 220px;
-            object-fit: contain;
-            border-radius: 8px;
-            display: none;
-        }
+        .image-preview { max-height: 220px; object-fit: contain; border-radius: 8px; display: none; }
+        .label-style { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #64748b; margin-bottom: 0.3rem; display: block; }
 
-        .label-style {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #64748b;
-            margin-bottom: 0.3rem;
-            display: block;
-        }
-
-        /* Effetti per Login */
         .login-bg { background-color: #0f172a; background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%); }
         .fade-in { animation: fadeIn 0.5s ease-in forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -94,18 +46,16 @@
                     <label class="label-style text-slate-700">Codice di Accesso</label>
                     <input type="password" id="loginPwd" class="w-full p-4 input-editorial text-center text-lg tracking-widest font-mono" placeholder="••••••••" onkeypress="handleLoginKey(event)">
                 </div>
-                <button onclick="attemptLogin()" id="loginBtn" class="w-full py-4 btn-editorial rounded-lg text-sm tracking-widest flex justify-center items-center">
-                    <span>ACCEDI AL SISTEMA</span>
+                <button onclick="attemptLogin()" id="loginBtn" disabled class="w-full py-4 btn-editorial rounded-lg text-sm tracking-widest flex justify-center items-center opacity-70">
+                    <span class="animate-pulse">INIZIALIZZAZIONE...</span>
                 </button>
-                <div id="loginError" class="hidden text-center text-xs font-bold text-red-600 bg-red-50 p-3 rounded-lg border border-red-100">
-                    Accesso Negato. Password errata.
-                </div>
+                <div id="loginError" class="hidden text-center text-xs font-bold text-red-600 bg-red-50 p-3 rounded-lg border border-red-100"></div>
             </div>
         </div>
     </div>
 
     <!-- ==========================================
-         EDITOR PRINCIPALE (Nascosto di default)
+         EDITOR PRINCIPALE
          ========================================== -->
     <div id="appContainer" class="hidden p-4 md:p-8">
         <div class="max-w-7xl mx-auto">
@@ -115,7 +65,6 @@
                 <p class="text-sm font-semibold uppercase tracking-[0.3em] text-slate-500">Pannello di Pubblicazione Editoriale</p>
             </header>
 
-            <!-- Area Parsing -->
             <div class="news-card p-6 mb-8 border-t-4 border-t-slate-800">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-sm font-bold text-slate-700 uppercase tracking-wider flex items-center">
@@ -175,11 +124,9 @@
                     </div>
                 </div>
 
-                <!-- COLONNA CENTRALE E DESTRA -->
+                <!-- COLONNA DESTRA -->
                 <div class="lg:col-span-8 space-y-6">
-                    
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Autori -->
                         <div class="news-card p-6">
                             <h3 class="label-style mb-4 text-slate-800">Firme & Contributori</h3>
                             <div class="mb-4">
@@ -191,44 +138,39 @@
                                 <div id="authorsPlayers" class="mt-2 space-y-1.5"></div>
                             </div>
                         </div>
-
-                        <!-- Categorie -->
                         <div class="news-card p-6">
                             <h3 class="label-style mb-4 text-slate-800">Sezioni Editoriali</h3>
                             <div id="topicsList" class="grid grid-cols-1 sm:grid-cols-2 gap-2"></div>
                         </div>
                     </div>
 
-                    <!-- Testo dell'Articolo -->
                     <div class="news-card p-6 flex flex-col min-h-[350px]">
                         <h3 class="label-style mb-3">Corpo dell'Articolo (Testo)</h3>
                         <textarea id="content" class="flex-grow w-full p-4 input-editorial text-sm leading-relaxed custom-scrollbar bg-slate-50" placeholder="Redigi l'articolo qui..."></textarea>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Immagini -->
                         <div class="news-card p-6">
                             <h3 class="label-style mb-4">Materiale Fotografico</h3>
                             <div class="flex gap-4 mb-3 text-xs font-semibold">
                                 <label class="cursor-pointer flex items-center text-slate-700"><input type="radio" name="imgMethod" value="url" checked onchange="toggleImgInput()" class="mr-1.5"> Link Web</label>
-                                <label class="cursor-pointer flex items-center text-slate-700"><input type="radio" name="imgMethod" value="file" onchange="toggleImgInput()" class="mr-1.5"> File PC/Mobile</label>
+                                <label class="cursor-pointer flex items-center text-slate-700"><input type="radio" name="imgMethod" value="file" onchange="toggleImgInput()" class="mr-1.5"> File PC</label>
                             </div>
                             <div id="urlInputContainer"><input type="text" id="imageUrl" oninput="updatePreview()" class="w-full p-2 input-editorial text-sm" placeholder="https://..."></div>
-                            <div id="fileInputContainer" class="hidden"><input type="file" id="imageFile" onchange="updatePreview()" class="text-xs w-full text-slate-500 file:bg-slate-100 file:text-slate-700"></div>
-                            <div class="mt-4 p-2 bg-slate-50 rounded-lg flex justify-center items-center min-h-[120px] border border-slate-100">
+                            <div id="fileInputContainer" class="hidden"><input type="file" id="imageFile" onchange="updatePreview()" class="text-xs w-full text-slate-500 file:bg-slate-100"></div>
+                            <div class="mt-4 p-2 bg-slate-50 rounded-lg flex justify-center min-h-[120px] border border-slate-100">
                                 <img id="imagePreview" src="#" class="image-preview shadow-sm">
-                                <span id="previewPlaceholder" class="text-xs text-slate-400 font-medium">Nessuna foto selezionata</span>
+                                <span id="previewPlaceholder" class="text-xs text-slate-400 font-medium">Nessuna foto</span>
                             </div>
                         </div>
 
-                        <!-- Legali & Submit -->
                         <div class="flex flex-col space-y-6">
                             <div class="news-card p-6 flex-grow">
                                 <h3 class="label-style mb-2">Copyright</h3>
                                 <textarea id="copyright" class="w-full p-3 text-xs input-editorial h-24 bg-slate-50 text-slate-600">The Ultimate Times © 2026 - 2027 - All Rights Reserved - Questo articolo è stato pubblicato originariamente da The Ultimate Times, la riproduzione non autorizzata o la diffamazione comporterà il rischio di azioni legali.</textarea>
                             </div>
 
-                            <button onclick="publish()" id="sendBtn" class="w-full py-5 btn-editorial text-lg rounded-xl flex items-center justify-center relative">
+                            <button onclick="publish()" id="sendBtn" class="w-full py-5 btn-editorial text-lg rounded-xl flex items-center justify-center">
                                 <span id="btnText">PUBBLICA ARTICOLO</span>
                                 <span id="btnLoader" class="hidden ml-3 animate-spin">
                                     <svg class="w-5 h-5 text-white" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
@@ -245,12 +187,43 @@
 
     <script>
         // ==========================================
-        // 🔒 SISTEMA DI SICUREZZA
+        // VARIABILE GLOBALE DI CONFIGURAZIONE
         // ==========================================
-        
-        // HASH di default corrispondente a: "password"
-        const AUTHORIZED_HASH = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8";
+        let CONFIG = null;
+        let tsInterval;
+        let cooldownInterval;
 
+        // Fase di Avvio: Fetch config.json
+        window.onload = async () => {
+            const btn = document.getElementById('loginBtn');
+            const errorBox = document.getElementById('loginError');
+
+            try {
+                // Legge il file config.json dalla cartella principale
+                const response = await fetch('config.json');
+                if (!response.ok) throw new Error("File config.json non trovato.");
+                CONFIG = await response.json();
+                
+                // Configurazione Caricata, Sblocca il Login
+                btn.disabled = false;
+                btn.classList.remove('opacity-70');
+                btn.innerHTML = '<span>ACCEDI AL SISTEMA</span>';
+
+                // Se la sessione è già attiva, bypassa il login
+                if (sessionStorage.getItem('ut_auth') === 'granted') {
+                    showApp();
+                }
+            } catch (error) {
+                console.error("Errore di Inizializzazione:", error);
+                btn.innerHTML = '<span class="text-red-500">ERRORE CONFIGURAZIONE</span>';
+                errorBox.innerText = "Impossibile caricare config.json. Assicurati di aver caricato il file su GitHub.";
+                errorBox.classList.remove('hidden');
+            }
+        };
+
+        // ==========================================
+        // SISTEMA DI SICUREZZA
+        // ==========================================
         async function sha256(message) {
             const msgBuffer = new TextEncoder().encode(message);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -259,16 +232,20 @@
         }
 
         async function attemptLogin() {
+            if(!CONFIG) return;
             const input = document.getElementById('loginPwd').value;
             const errorBox = document.getElementById('loginError');
             const btn = document.getElementById('loginBtn');
+            
             btn.innerHTML = '<span class="animate-pulse">VERIFICA...</span>';
             const hashedInput = await sha256(input);
-            if (hashedInput === AUTHORIZED_HASH) {
+            
+            if (hashedInput === CONFIG.AUTHORIZED_HASH) {
                 sessionStorage.setItem('ut_auth', 'granted');
                 showApp();
             } else {
                 btn.innerHTML = '<span>ACCEDI AL SISTEMA</span>';
+                errorBox.innerText = "Accesso Negato. Password errata.";
                 errorBox.classList.remove('hidden');
                 setTimeout(() => errorBox.classList.add('hidden'), 3000);
             }
@@ -277,51 +254,28 @@
         function handleLoginKey(e) { if (e.key === 'Enter') attemptLogin(); }
         function showApp() { document.getElementById('loginContainer').classList.add('hidden'); document.getElementById('appContainer').classList.remove('hidden'); initApp(); }
         function logout() { sessionStorage.removeItem('ut_auth'); location.reload(); }
-        window.onload = () => { if (sessionStorage.getItem('ut_auth') === 'granted') showApp(); };
 
         // ==========================================
-        // 📜 AREA DI CONFIGURAZIONE APP
+        // GESTIONE INTERFACCIA
         // ==========================================
-        
-        const WEB_MAIN = "https://discord.com/api/webhooks/1176948898766528582/14Q_1GoCSey1xKihpxok603OvHa8NFHO78Lx605q0jLSrkAdBCKeTzJhEKA0bsBpqLWL";
-        const WEB_ARCH = "https://discord.com/api/webhooks/1484830827530424372/0gDHgt_APA3ptlXn6t6WyTEr2i7KiMNsrtMB-Cvf655-5fOC2ckkiC2QIWNRH98Q_fBe";
-        
-        // Percorso del banner (locale via GitHub Pages)
-        const OFFICIAL_BANNER_PATH = "banners/banner.png"; 
-
-        // Cooldown (Anti-Spam) in millisecondi: 2 Minuti
-        const COOLDOWN_TIME = 120000; 
-
-        const AUTHORS_JOURNALISTS = ["Lumos Bryan (CEO dell'Ultimate Times)", "Sebastian Synclaire (CEO della Voce della Croce)", "Jonas Falkner (Esperto di Politica)", "Adrian Falkner (Cronista di Esteri)", "Elias Krantz (Inviato Speciale)", "Liora Venshall (Reporter di Cronaca)", "Markus Drehl (Analista Economico)", "Nora Veltrin (Giornalista Investigativa)", "Cedric Mallor (Corrispondente di Guerra)", "Freya Dornach (Editorialista)", "Hugo Branth (Reporter Culturale)", "Selene Vorath (Giornalista Ambientale)", "Tobias Krenzel (Reporter di Tecnologia)"];
-        const AUTHORS_PLAYERS = ["Blackstrat67", "ItzStellaExe", "ItzElxes04"];
-        const TOPICS = ["Notizie Giornalistiche", "Politica", "Economia", "Attualità", "Tecnologia", "Cultura", "Sport", "Scienza", "Salute", "Ambiente", "Cronaca", "Intrattenimento"];
-        const BRAND_COLOR = 1976635; 
-        const ROLE_ID = "1133318954841014362";
-
-        let tsInterval;
-        let cooldownInterval;
-
         function initApp() {
+            // Popoliamo l'interfaccia usando le liste di config.json
             const jDiv = document.getElementById('authorsJournalists');
             if(jDiv.innerHTML === "") { 
-                AUTHORS_JOURNALISTS.forEach(a => jDiv.innerHTML += `<label class="flex items-center space-x-2.5 p-1.5 hover:bg-slate-50 rounded cursor-pointer transition"><input type="checkbox" name="author" value="${a}" class="rounded text-slate-800 border-slate-300 focus:ring-slate-500 w-3.5 h-3.5"> <span class="text-xs font-medium text-slate-700 leading-tight">${a}</span></label>`);
+                CONFIG.AUTHORS_JOURNALISTS.forEach(a => jDiv.innerHTML += `<label class="flex items-center space-x-2.5 p-1.5 hover:bg-slate-50 rounded cursor-pointer transition"><input type="checkbox" name="author" value="${a}" class="rounded text-slate-800 border-slate-300 focus:ring-slate-500 w-3.5 h-3.5"> <span class="text-xs font-medium text-slate-700 leading-tight">${a}</span></label>`);
                 const pDiv = document.getElementById('authorsPlayers');
-                AUTHORS_PLAYERS.forEach(a => pDiv.innerHTML += `<label class="flex items-center space-x-2.5 p-1.5 hover:bg-slate-50 rounded cursor-pointer transition"><input type="checkbox" name="author" value="${a}" class="rounded text-slate-800 border-slate-300 focus:ring-slate-500 w-3.5 h-3.5"> <span class="text-xs font-semibold text-slate-800">${a}</span></label>`);
+                CONFIG.AUTHORS_PLAYERS.forEach(a => pDiv.innerHTML += `<label class="flex items-center space-x-2.5 p-1.5 hover:bg-slate-50 rounded cursor-pointer transition"><input type="checkbox" name="author" value="${a}" class="rounded text-slate-800 border-slate-300 focus:ring-slate-500 w-3.5 h-3.5"> <span class="text-xs font-semibold text-slate-800">${a}</span></label>`);
                 const topDiv = document.getElementById('topicsList');
-                TOPICS.forEach(t => topDiv.innerHTML += `<label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-md cursor-pointer hover:bg-slate-50 transition"><input type="checkbox" name="topic" value="${t}" class="rounded text-slate-600 border-slate-300"> <span class="text-xs font-medium text-slate-600">${t}</span></label>`);
+                CONFIG.TOPICS.forEach(t => topDiv.innerHTML += `<label class="flex items-center space-x-2 p-2 bg-white border border-slate-200 rounded-md cursor-pointer hover:bg-slate-50 transition"><input type="checkbox" name="topic" value="${t}" class="rounded text-slate-600 border-slate-300"> <span class="text-xs font-medium text-slate-600">${t}</span></label>`);
             }
             const n = new Date(); n.setMinutes(n.getMinutes() - n.getTimezoneOffset());
             document.getElementById('tsDate').value = n.toISOString().slice(0, 16);
             if(!tsInterval) tsInterval = setInterval(updateTS, 1000);
 
-            // Inizializza il controllo del Cooldown
             checkCooldown();
             if(!cooldownInterval) cooldownInterval = setInterval(checkCooldown, 1000);
         }
 
-        // ==========================================
-        // ⏳ GESTIONE TIMER (COOLDOWN)
-        // ==========================================
         function checkCooldown() {
             const lastPublish = localStorage.getItem('ut_last_publish');
             const btn = document.getElementById('sendBtn');
@@ -329,8 +283,8 @@
             
             if (lastPublish) {
                 const elapsed = Date.now() - parseInt(lastPublish);
-                if (elapsed < COOLDOWN_TIME) {
-                    const remaining = Math.ceil((COOLDOWN_TIME - elapsed) / 1000);
+                if (elapsed < CONFIG.COOLDOWN_TIME) {
+                    const remaining = Math.ceil((CONFIG.COOLDOWN_TIME - elapsed) / 1000);
                     const minutes = Math.floor(remaining / 60);
                     const seconds = remaining % 60;
                     btn.disabled = true;
@@ -338,7 +292,6 @@
                     return;
                 }
             }
-            // Se non c'è cooldown o è finito
             if(btn.disabled && btnText.innerText.startsWith("ATTENDI")) {
                 btn.disabled = false;
                 btnText.innerText = "PUBBLICA ARTICOLO";
@@ -384,14 +337,13 @@
             const r = document.getElementById('quickPaste').value;
             const p = { title: /np:title\s+([\s\S]*?)(?=\s*np:|$)/i, subtitle: /np:subtitle\s+([\s\S]*?)(?=\s*np:|$)/i, hashtags: /np:hashtags\s+([\s\S]*?)(?=\s*np:|$)/i, content: /np:content\s+([\s\S]*?)(?=\s*np:|$)/i };
             Object.entries(p).forEach(([k, v]) => { const m = r.match(v); if(m) document.getElementById(k).value = m[1].trim(); });
-            showMessage("Testo importato correttamente", "success");
+            showMessage("Testo importato", "success");
         }
 
         // ==========================================
-        // 📰 GENERATORE DOCUMENTO STILE GIORNALE (.doc)
+        // PUBBLICAZIONE E FORMATTAZIONE
         // ==========================================
         function createFormattedWordDocument(title, subtitle, content, location, dateStr, authors, topics, hashtags, copyright) {
-            // Sostituiamo gli a capo con paragrafi formattati (rientro prima riga)
             const formattedContent = content.split('\n')
                 .filter(p => p.trim() !== '')
                 .map(p => `<p style="text-align: justify; text-indent: 25px; margin-bottom: 12px; font-size: 11pt;">${p}</p>`)
@@ -414,40 +366,20 @@
                 </style>
             </head>
             <body>
-                <div class="header-box">
-                    <p class="newspaper-title">THE ULTIMATE TIMES</p>
-                    <p class="newspaper-subtitle">Gazzetta di Informazione Indipendente</p>
-                </div>
-                
+                <div class="header-box"><p class="newspaper-title">THE ULTIMATE TIMES</p><p class="newspaper-subtitle">Gazzetta di Informazione Indipendente</p></div>
                 <p class="article-title">${title}</p>
                 ${subtitle ? `<p class="article-subtitle">${subtitle}</p>` : ''}
-                
-                <div class="metadata">
-                    <b>DATA:</b> ${dateStr} &nbsp;&nbsp;|&nbsp;&nbsp; <b>LUOGO:</b> ${location || 'Sede Centrale'} &nbsp;&nbsp;|&nbsp;&nbsp; <b>SEZIONE:</b> ${topics}<br>
-                    <b>FIRME:</b> ${authors}
-                </div>
-                
-                <div class="content-wrapper">
-                    ${formattedContent}
-                </div>
-                
-                <div class="footer-box">
-                    ${hashtags ? `<p style="font-weight:bold;">${hashtags}</p>` : ''}
-                    <p>${copyright}</p>
-                </div>
+                <div class="metadata"><b>DATA:</b> ${dateStr} &nbsp;&nbsp;|&nbsp;&nbsp; <b>LUOGO:</b> ${location || 'Sede Centrale'} &nbsp;&nbsp;|&nbsp;&nbsp; <b>SEZIONE:</b> ${topics}<br><b>FIRME:</b> ${authors}</div>
+                <div class="content-wrapper">${formattedContent}</div>
+                <div class="footer-box">${hashtags ? `<p style="font-weight:bold;">${hashtags}</p>` : ''}<p>${copyright}</p></div>
             </body>
             </html>`;
-
-            // Creiamo un Blob come file MS Word. (L'estensione .doc fa sì che Word legga i tag HTML come formattazione nativa)
-            // Utilizziamo il prefisso \ufeff per specificare la codifica UTF-8
             return new Blob(['\ufeff', htmlContent], { type: 'application/msword' });
         }
 
-
         async function publish() {
-            // Controllo Cooldown Anti-Spam
             const lastPublish = localStorage.getItem('ut_last_publish');
-            if (lastPublish && (Date.now() - parseInt(lastPublish) < COOLDOWN_TIME)) {
+            if (lastPublish && (Date.now() - parseInt(lastPublish) < CONFIG.COOLDOWN_TIME)) {
                 return showMessage("Stai inviando articoli troppo velocemente. Attendi il timer.", "error");
             }
 
@@ -458,10 +390,7 @@
             const l = document.getElementById('location').value;
             const s = document.getElementById('journalSource').value;
             const ts = document.getElementById('tsPreview').innerText;
-            
-            // Per il docx estraiamo una data leggibile per umani invece del codice Discord <t:123:f>
             const humanDate = new Date(document.getElementById('tsDate').value).toLocaleString('it-IT');
-
             const auths = Array.from(document.querySelectorAll('input[name="author"]:checked')).map(x => x.value);
             const tops = Array.from(document.querySelectorAll('input[name="topic"]:checked')).map(x => x.value);
             const cp = document.getElementById('copyright').value;
@@ -478,9 +407,9 @@
             msg += `📍 **Luogo** - ${l || 'Sede Centrale'}\n`;
             msg += `🏷️ **Sezione** - ${tops.join(", ") || 'Notizie'}\n`;
             msg += `📄 **Fonte** - ${s}\n`;
-            msg += `📢 **Menzioni** - <@&${ROLE_ID}>\n`;
+            msg += `📢 **Menzioni** - <@&${CONFIG.ROLE_ID}>\n`;
 
-            const embeds = [{ description: c, color: BRAND_COLOR }];
+            const embeds = [{ description: c, color: CONFIG.BRAND_COLOR }];
 
             try {
                 const fd = new FormData();
@@ -489,59 +418,44 @@
                 const url = document.getElementById('imageUrl').value;
 
                 if(method === 'file' && file) {
-                    embeds.push({ image: { url: 'attachment://media.png' }, color: BRAND_COLOR });
+                    embeds.push({ image: { url: 'attachment://media.png' }, color: CONFIG.BRAND_COLOR });
                     fd.append('file_article', file, 'media.png');
                 } else if(url) {
-                    embeds.push({ image: { url: url }, color: BRAND_COLOR });
+                    embeds.push({ image: { url: url }, color: CONFIG.BRAND_COLOR });
                 }
 
-                embeds.push({ 
-                    description: `*Articolo redatto da* **${auths.join(", ") || 'Redazione The Ultimate Times'}**`, 
-                    color: BRAND_COLOR 
-                });
+                embeds.push({ description: `*Articolo redatto da* **${auths.join(", ") || 'Redazione The Ultimate Times'}**`, color: CONFIG.BRAND_COLOR });
 
                 // Fetch locale del Banner
-                if (OFFICIAL_BANNER_PATH && OFFICIAL_BANNER_PATH.trim() !== "") {
+                if (CONFIG.OFFICIAL_BANNER_PATH && CONFIG.OFFICIAL_BANNER_PATH.trim() !== "") {
                     try {
-                        const bannerResponse = await fetch(OFFICIAL_BANNER_PATH);
+                        const bannerResponse = await fetch(CONFIG.OFFICIAL_BANNER_PATH);
                         if (bannerResponse.ok) {
                             const bannerBlob = await bannerResponse.blob();
-                            const fileName = OFFICIAL_BANNER_PATH.split('/').pop() || 'banner.png';
-                            embeds.push({ image: { url: `attachment://${fileName}` }, color: BRAND_COLOR });
+                            const fileName = CONFIG.OFFICIAL_BANNER_PATH.split('/').pop() || 'banner.png';
+                            embeds.push({ image: { url: `attachment://${fileName}` }, color: CONFIG.BRAND_COLOR });
                             fd.append('file_banner', bannerBlob, fileName);
                         }
-                    } catch (err) { console.error("Banner offline ignorato."); }
+                    } catch (err) { console.warn("Banner locale ignorato.", err); }
                 }
 
                 fd.append('payload_json', JSON.stringify({ content: msg, embeds }));
 
-                // 1. Invio a Canale Notizie
-                const res1 = await fetch(WEB_MAIN, { method: 'POST', body: fd });
+                // 1. Invio Main
+                const res1 = await fetch(CONFIG.WEB_MAIN, { method: 'POST', body: fd });
 
-                // 2. Invio Archivio Formattato Stile Giornale
-                const docBlob = createFormattedWordDocument(
-                    t, st, c, l, humanDate, 
-                    auths.join(", ") || 'Redazione', 
-                    tops.join(", ") || 'Generale', 
-                    h, cp
-                );
-                
+                // 2. Invio Archivo
+                const docBlob = createFormattedWordDocument(t, st, c, l, humanDate, auths.join(", "), tops.join(", "), h, cp);
                 const afd = new FormData();
-                afd.append('payload_json', JSON.stringify({ content: `💾 **Archivio Pubblicazione Formattata**: \`${t}\`` }));
-                
-                // Salviamo il file come .doc (Microsoft Word lo aprirà renderizzando il codice HTML/CSS come un giornale reale)
+                afd.append('payload_json', JSON.stringify({ content: `💾 **Archivio Pubblicazione**: \`${t}\`` }));
                 afd.append('file', docBlob, `TheUltimateTimes_${t.replace(/[^a-z0-9]/gi, '_')}.doc`);
-                await fetch(WEB_ARCH, { method: 'POST', body: afd });
+                await fetch(CONFIG.WEB_ARCH, { method: 'POST', body: afd });
 
                 if(res1.ok) {
-                    // Set del Cooldown in memoria
                     localStorage.setItem('ut_last_publish', Date.now().toString());
-                    checkCooldown(); // Attiva subito l'UI del timer
-                    
-                    showMessage("Articolo e Documento formattato inviati con successo!", "success");
-                } else {
-                    throw new Error();
-                }
+                    checkCooldown(); 
+                    showMessage("Articolo e Documento inviati con successo!", "success");
+                } else throw new Error();
             } catch(e) { 
                 showMessage("Errore di connessione al webhook.", "error"); 
             }
@@ -559,7 +473,7 @@
                 btnText.innerText = "PUBBLICAZIONE IN CORSO...";
             } else {
                 btnLoader.classList.add('hidden');
-                checkCooldown(); // Reimposta il bottone al suo stato corretto (Timer o Attivo)
+                checkCooldown();
             }
         }
 
