@@ -1,0 +1,43 @@
+{
+    "AUTHORIZED_HASH": "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
+    "WEB_MAIN": "https://discord.com/api/webhooks/1176948898766528582/14Q_1GoCSey1xKihpxok603OvHa8NFHO78Lx605q0jLSrkAdBCKeTzJhEKA0bsBpqLWL",
+    "WEB_ARCH": "https://discord.com/api/webhooks/1484830827530424372/0gDHgt_APA3ptlXn6t6WyTEr2i7KiMNsrtMB-Cvf655-5fOC2ckkiC2QIWNRH98Q_fBe",
+    "OFFICIAL_BANNER_PATH": "banners/banner.png",
+    "COOLDOWN_TIME": 120000,
+    "BRAND_COLOR": 1976635,
+    "ROLE_ID": "1133318954841014362",
+    "AUTHORS_JOURNALISTS": [
+        "Lumos Bryan (CEO dell'Ultimate Times)",
+        "Sebastian Synclaire (CEO della Voce della Croce)",
+        "Jonas Falkner (Esperto di Politica)",
+        "Adrian Falkner (Cronista di Esteri)",
+        "Elias Krantz (Inviato Speciale)",
+        "Liora Venshall (Reporter di Cronaca)",
+        "Markus Drehl (Analista Economico)",
+        "Nora Veltrin (Giornalista Investigativa)",
+        "Cedric Mallor (Corrispondente di Guerra)",
+        "Freya Dornach (Editorialista)",
+        "Hugo Branth (Reporter Culturale)",
+        "Selene Vorath (Giornalista Ambientale)",
+        "Tobias Krenzel (Reporter di Tecnologia)"
+    ],
+    "AUTHORS_PLAYERS": [
+        "Blackstrat67",
+        "ItzStellaExe",
+        "ItzElxes04"
+    ],
+    "TOPICS": [
+        "Notizie Giornalistiche",
+        "Politica",
+        "Economia",
+        "Attualità",
+        "Tecnologia",
+        "Cultura",
+        "Sport",
+        "Scienza",
+        "Salute",
+        "Ambiente",
+        "Cronaca",
+        "Intrattenimento"
+    ]
+}
